@@ -1,0 +1,52 @@
+<build>
+	<plugins>
+		<plugin>
+			<groupId>com.nero.maven</groupId>
+			<artifactId>exappassembler-maven-plugin</artifactId>
+			<version>1.0</version>
+			<configuration>
+				<!-- 根目录 -->
+				<assembleDirectory>${project.build.directory}/${project.name}</assembleDirectory>
+				<!-- 生成linux, windows两种平台的执行脚本 -->
+				<platforms>
+					<platform>windows</platform>
+					<platform>unix</platform>
+				</platforms>
+				<!-- 脚本扩展名 -->
+				<binFileExtensions>
+					<unix>.sh</unix>
+				</binFileExtensions>
+				<!-- 可执行脚本的目录 -->
+				<binFolder>bin</binFolder>
+				<!-- 打包的jar，以及maven依赖的jar放到这个目录里面 -->
+				<repositoryName>lib</repositoryName>
+				<!-- lib目录中jar的存放规则，默认是${groupId}/${artifactId}的目录格式，flat表示直接把jar放到lib目录 -->
+				<repositoryLayout>flat</repositoryLayout>
+				<!-- 配置文件的目标目录 -->
+				<configurationDirectory>conf</configurationDirectory>
+				<!-- 是否拷贝配置文件到上面的目录 -->
+				<copyConfigurationDirectory>true</copyConfigurationDirectory>
+				<!-- 是否覆盖配置文件目录中的文件 -->
+				<overwrite>true</overwrite>
+				<!-- 从哪里拷贝配置文件 默认 src/main/resources-->
+				<configurationSourceDirectory>src/main/resources</configurationSourceDirectory>
+				<!-- 从哪里拷贝环境配置文件  -->
+				<profileConfigurationSourceDirectory>src/main/resources-${profiles.active}</profileConfigurationSourceDirectory>
+				<encoding>UTF-8</encoding>
+				<programs>
+					<program>
+						<!-- 启动类 -->
+						<mainClass>com.nero.maven.test.SpringRun</mainClass>
+						<jvmSettings>
+							<extraArguments>
+								<extraArgument>-server</extraArgument>
+								<extraArgument>-Xmx2G</extraArgument>
+								<extraArgument>-Xms2G</extraArgument>
+							</extraArguments>
+						</jvmSettings>
+					</program>
+				</programs>
+			</configuration>
+		</plugin>
+	</plugins>
+</build>
